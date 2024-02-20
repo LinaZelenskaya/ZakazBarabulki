@@ -1,0 +1,16 @@
+* {margin: 0px; box-sizing: border-box}
+
+header, nav, section {display: block;}
+
+.p1
+{
+    color: white;
+}
+
+main
+{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.fafa {text-align: center;}
