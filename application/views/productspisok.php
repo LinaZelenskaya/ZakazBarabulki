@@ -12,7 +12,7 @@
                 <p class="card-text">Цена за штуку: '.$row['ProductPrice'].'<br></p>
               </div>
               <div class="card-footer">
-                <a href="contragent/addzakaz/'.$row['ProductID'].'"><button type="button" class="btn btn-danger">Заказать</button></a>
+                <a href="admin/updprice/'.$row['ProductID'].'"><button type="button" class="btn btn-danger">Изменить цену</button></a>
               </div>
             </div>
           </div>';

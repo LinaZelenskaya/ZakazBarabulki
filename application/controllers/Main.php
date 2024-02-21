@@ -11,28 +11,82 @@ class Main extends CI_Controller
         {
             $this->load->view('temp/navadmin.php', $data);
             $this->load->model('product_model');
-            $data['fish'] = $this->product_model->productselect();
-            $this->load->view('main_view.php', $data);
+            $data['fishselect'] = $this->product_model->fishselect();
+            $this->load->view('filterfish.php', $data);
+            if(!empty($_POST))
+            {
+                $fishname = $_POST['fishname'];
+                $searchproductpriceC = $_POST['searchproductpriceC'];
+                $searchproductpricePo = $_POST['searchproductpricePo'];
+                $data['fish'] = $this->product_model->productfilter($fishname, $searchproductpriceC, $searchproductpricePo);
+                $this->load->view('main_viewgost.php', $data);
+            }
+            else
+            {
+                $data['fish'] = $this->product_model->productselect();
+                $this->load->view('main_viewgost.php', $data);
+            }
         }
         else if($user['RoleID'] == 2)
         {
             $this->load->view('temp/navoperator.php', $data);
             $this->load->model('product_model');
-            $data['fish'] = $this->product_model->productselect();
-            $this->load->view('main_view.php', $data);
+            $data['fishselect'] = $this->product_model->fishselect();
+            $this->load->view('filterfish.php', $data);
+            if(!empty($_POST))
+            {
+                $fishname = $_POST['fishname'];
+                $searchproductpriceC = $_POST['searchproductpriceC'];
+                $searchproductpricePo = $_POST['searchproductpricePo'];
+                $data['fish'] = $this->product_model->productfilter($fishname, $searchproductpriceC, $searchproductpricePo);
+                $this->load->view('main_view.php', $data);
+            }
+            else
+            {
+                $data['fish'] = $this->product_model->productselect();
+                $this->load->view('main_view.php', $data);
+            }
         }
         else if($user['RoleID'] == 3)
         {
             $this->load->view('temp/navcontr.php', $data);
-            $this->load->view('main_view.php', $data);
+            $this->load->model('product_model');
+            $data['fishselect'] = $this->product_model->fishselect();
+            $this->load->view('filterfish.php', $data);
+            if(!empty($_POST))
+            {
+                $fishname = $_POST['fishname'];
+                $searchproductpriceC = $_POST['searchproductpriceC'];
+                $searchproductpricePo = $_POST['searchproductpricePo'];
+                $data['fish'] = $this->product_model->productfilter($fishname, $searchproductpriceC, $searchproductpricePo);
+                $this->load->view('main_view.php', $data);
+            }
+            else
+            {
+                $data['fish'] = $this->product_model->productselect();
+                $this->load->view('main_view.php', $data);
+            }
         }
     }
     else
     {
         $this->load->view('temp/nav.php');
         $this->load->model('product_model');
-        $data['fish'] = $this->product_model->productselect();
-        $this->load->view('main_view.php', $data);
+        $data['fishselect'] = $this->product_model->fishselect();
+        $this->load->view('filterfish.php', $data);
+        if(!empty($_POST))
+            {
+                $fishname = $_POST['fishname'];
+                $searchproductpriceC = $_POST['searchproductpriceC'];
+                $searchproductpricePo = $_POST['searchproductpricePo'];
+                $data['fish'] = $this->product_model->productfilter($fishname, $searchproductpriceC, $searchproductpricePo);
+                $this->load->view('main_viewgost.php', $data);
+            }
+            else
+            {
+                $data['fish'] = $this->product_model->productselect();
+                $this->load->view('main_viewgost.php', $data);
+            }
     }
     $this->load->view('temp/footer.php');
   }

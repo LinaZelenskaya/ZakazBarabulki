@@ -38,5 +38,41 @@ class Operator extends CI_Controller
     $this->zakaz_model->updzakazstatusdostavl($OrderID);
     redirect("operator/allzakazoperator");
   }
+
+  public function kontr()
+    {
+        $this->load->view('temp/head.php');
+
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navoperator.php', $data);
+        $this->load->model('contr_model');
+        $data['contragent'] = $this->contr_model->filterkontr();
+
+        $this->load->view('kontr.php', $data);
+        $this->load->view('temp/footer.php');
+    }
+    public function product()
+    {
+        $this->load->view('temp/head.php');
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navoperator.php', $data);
+        $this->load->model('product_model');
+        $this->load->view('filterproduct.php');
+        if(!empty($_POST))
+        {   
+            $Searchproduct = $_POST['searchproductname'];
+            $SearchPrice = $_POST['searchproductprice'];
+            $data['product'] = $this->product_model->selectproductfilter($Searchproduct,$SearchPrice);
+            $this->load->view('product.php', $data);
+        }
+        else
+        {
+            $data['product'] = $this->product_model->product();
+            $this->load->view('product.php', $data);
+        }
+        $this->load->view('temp/footer.php');
+    }
 }
 ?>
