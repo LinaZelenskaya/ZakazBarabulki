@@ -5,10 +5,10 @@
             <div class="col-10">
             <form action="" method="POST">
                 <div class="form-group mb-2 col-4">
-                    <input type="text" class="form-control" placeholder="Логин" name="userlogin">
+                    <input type="text" class="form-control" placeholder="Логин" name="UserLogin">
                 </div>
                 <div class="form-group mb-2 col-4">
-                    <input type="password" class="form-control" placeholder="Пароль" name="userpassword">
+                    <input type="password" class="form-control" placeholder="Пароль" name="UserPassword">
                 </div>
                 <div class="form-group mb-2 col-4">
                     <button type="submit" class="btn btn-danger" name="submit" value="1">Войти</button><br>

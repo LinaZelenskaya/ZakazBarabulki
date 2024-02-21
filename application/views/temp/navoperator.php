@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <?php
-                            echo "<a class='nav-link'>На сайте: $userlogin</a>";
+                            echo "<a class='nav-link'>На сайте: $UserLogin</a>";
                         ?>
                     </li>
                 </ul>

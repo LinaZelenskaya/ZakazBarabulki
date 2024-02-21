@@ -43,10 +43,10 @@ class Main extends CI_Controller
       $this->load->view('temp/nav.php');
       if(!empty($_POST))
       {
-          $userlogin = $_POST['userlogin'];
-          $userpassword = $_POST['userpassword'];
+          $UserLogin = $_POST['UserLogin'];
+          $UserPassword = $_POST['UserPassword'];
           $this->load->model('user_model');
-          $user = $this->user_model->selectuser($userlogin, $userpassword);
+          $user = $this->user_model->selectuser($UserLogin, $UserPassword);
           var_dump($user);
           if(!empty($user))
           {
