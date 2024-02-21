@@ -11,7 +11,7 @@
                         <a class="nav-link active" aria-current="page" href="main"><u>Главная</u></a>
                     </li>                   
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="main"><u>Авторизация</u></a>
+                        <a class="nav-link active" aria-current="page" href="main/login"><u>Авторизация</u></a>
                     </li>
                 </ul>
               </div>

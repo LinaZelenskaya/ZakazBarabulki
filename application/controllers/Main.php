@@ -26,7 +26,6 @@ class Main extends CI_Controller
             $this->load->view('temp/navcontr.php', $data);
             $this->load->view('main_view.php', $data);
         }
-        
     }
     else
     {
@@ -36,35 +35,29 @@ class Main extends CI_Controller
         $this->load->view('main_view.php', $data);
     }
     $this->load->view('temp/footer.php');
-}
+  }
 
-    // public function index()
-    // {
-    //     $this->load->view('temp/header.php');
-    //     $this->load->view('temp/navbar.php');
-    //     $this->load->view('main_view.php');
-    //     $this->load->view('temp/footer.php');
-    // }
-  
-    // public function grupp(){
-    //     $this->load->view('temp/header.php');
-    //     $this->load->view('temp/navbar.php');
-    //     $this->load->view('form_grupp.php');
-    //     $this->load->model('gruppa_model');
-    //     $data['gruppa']= $this->gruppa_model->gruppa_select();
-    //     $this->load->view('view_grupp.php',$data);
-    //     $this->load->view('temp/footer.php'); 
-    // }
-    // public function ins_grupp()
-    // {
-    //   if (!empty($_POST)){
-    //     $name_gruppa = $_POST['name_gruppa'];
-    //     $spec = $_POST['spec'];
-    //     $this->load->model('gruppa_model');
-    //     $this->gruppa_model->gruppa_insert($name_gruppa, $spec);
-    //     redirect('main/grupp');
-    //       }
-    //   }
-  
+    //Авторизация
+    public function login(){
+      $this->load->view('temp/head.php');
+      $this->load->view('temp/nav.php');
+      if(!empty($_POST))
+      {
+          $userlogin = $_POST['UserLogin'];
+          $userpassword = $_POST['UserPassword'];
+          $this->load->model('user_model');
+          $user = $this->user_model->selectuser($userlogin, $userpassword);
+          // var_dump($user);
+          if(!empty($user))
+          {
+              $this->session->set_userdata($user);
+              
+          }
+          redirect("main/index");
+      }
+      $this->load->view('login.php');
+      $this->load->view('temp/footer.php');
+      //Запишем данные в сессию
+    }
 }
 ?>
