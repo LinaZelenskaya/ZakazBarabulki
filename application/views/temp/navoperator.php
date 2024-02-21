@@ -11,13 +11,13 @@
                         <a class="nav-link active" aria-current="page" href="main"><u>Контрагенты</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="klient/lichniykabinet"><u>Товары</u></a>
+                        <a class="nav-link active" aria-current="page" href=""><u>Товары</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="main"><u>Список заказов</u></a>
+                        <a class="nav-link active" aria-current="page" href="operator/allzakazoperator"><u>Список заказов</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="main"><u>Доставка заказов</u></a>
+                        <a class="nav-link active" aria-current="page" href=""><u>Доставка заказов</u></a>
                     </li>
                     <li>
                         <?php
