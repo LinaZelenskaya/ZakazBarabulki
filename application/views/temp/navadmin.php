@@ -8,7 +8,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav w-100">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="main"><u>Контрагенты</u></a>
+                        <a class="nav-link active" aria-current="page" href="admin/allcontragent"><u>Контрагенты</u></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="director/otchetcar"><u>Пользователи</u></a>
@@ -17,13 +17,13 @@
                         <a class="nav-link active" aria-current="page" href="director/otchetprice"><u>Прайс-листы</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="director/otchetmanager"><u>Товары</u></a>
+                        <a class="nav-link active" aria-current="page" href="admin/alltovar"><u>Товары</u></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="director/otchetmanager"><u>Отчеты</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="director/otchetmanager"><u>Заказы</u></a>
+                        <a class="nav-link active" aria-current="page" href="admin/allcontragentzakaz"><u>Заказы</u></a>
                     </li>
                     <li>
                         <?php
