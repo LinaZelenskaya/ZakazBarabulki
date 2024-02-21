@@ -24,5 +24,19 @@ class Operator extends CI_Controller
     }
     $this->load->view('temp/footer.php');
   }
+
+  public function updzakazstatus(){
+    $OrderID = $this->uri->segment(3,0);
+    $this->load->model('zakaz_model');
+    $this->zakaz_model->updstatus($OrderID);
+    redirect("operator/allzakazoperator");
+  }
+  
+  public function updzakazstatusdostavl(){
+    $OrderID = $this->uri->segment(3,0);
+    $this->load->model('zakaz_model');
+    $this->zakaz_model->updzakazstatusdostavl($OrderID);
+    redirect("operator/allzakazoperator");
+  }
 }
 ?>

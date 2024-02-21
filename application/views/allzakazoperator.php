@@ -7,6 +7,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>ID заказа</th>
                                 <th>ID контрагента</th>
                                 <th>ФИО контрагента</th>
                                 <th>Магазин контрагента</th>
@@ -16,6 +17,7 @@
                                 <th>Количество заказа</th>
                                 <th>Цена заказа</th>
                                 <th>Статус</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <?php
@@ -24,6 +26,7 @@
                             foreach($zakaz as $row)
                             {
                                 echo '<tr>
+                                <td>'.$row['OrderID'].'</td>
                                 <td>'.$row['UserID'].'</td>
                                 <td>'.$row['FIO'].'</td>
                                 <td>'.$row['ContragentName'].'</td>
@@ -31,9 +34,27 @@
                                 <td>'.$row['OrderDatePlanPostav'].'</td>
                                 <td>'.$row['OrderDateFactPostav'].'</td>
                                 <td>'.$row['OrderCount'].'</td>
-                                <td>'.$row['price'].'</td>
-                                <td>'.$row['OrderStatus'].'</td>
-                                </tr>';
+                                <td>'.$row['price'].'</td>';
+                                if($row['OrderStatus']==0)
+                                {
+                                    echo '<td>Не оплачен</td>
+                                    <td></td>';
+                                }
+                                if($row['OrderStatus']==1)
+                                {
+                                    echo '<td><a href="operator/updzakazstatus/'.$row['OrderID'].'"><button type="button" class="btn btn-danger">Выслать</button></a></td>
+                                    <td></td>';
+                                }
+                                if($row['OrderStatus']==2)
+                                {
+                                    echo '<td>Выслано</td>
+                                    <td><a href="operator/updzakazstatusdostavl/'.$row['OrderID'].'"><button type="button" class="btn btn-danger">Досталено</button></a></td>';
+                                }
+                                if($row['OrderStatus']==3)
+                                {
+                                    echo '<td>Выполнено</td>';
+                                }
+                                echo '</tr>';
                             }
                         } 
                         ?>
