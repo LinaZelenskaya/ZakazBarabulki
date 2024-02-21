@@ -11,7 +11,7 @@
                         <a class="nav-link active" aria-current="page" href="main"><u>Товары</u></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="manager/zayavki"><u>Оформление заказа</u></a>
+                        <a class="nav-link active" aria-current="page" href="manager/zayavki"><u>Мои заказы</u></a>
                     </li>
                     <li>
                         <?php
