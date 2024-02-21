@@ -43,21 +43,29 @@ class Main extends CI_Controller
       $this->load->view('temp/nav.php');
       if(!empty($_POST))
       {
-          $userlogin = $_POST['UserLogin'];
-          $userpassword = $_POST['UserPassword'];
+          $userlogin = $_POST['userlogin'];
+          $userpassword = $_POST['userpassword'];
           $this->load->model('user_model');
           $user = $this->user_model->selectuser($userlogin, $userpassword);
-          // var_dump($user);
+          var_dump($user);
           if(!empty($user))
           {
               $this->session->set_userdata($user);
-              
           }
           redirect("main/index");
       }
       $this->load->view('login.php');
       $this->load->view('temp/footer.php');
       //Запишем данные в сессию
+    }
+
+    //Выход
+    public function logout()
+    {
+        $this->session->unset_userdata('UserID');
+        $this->session->unset_userdata('UserLogin');
+        $this->session->unset_userdata('RoleID');
+        redirect('main/index');
     }
 }
 ?>
