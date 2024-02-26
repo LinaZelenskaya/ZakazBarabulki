@@ -150,5 +150,135 @@ class Admin extends CI_Controller
             redirect("admin/product");
         }
     }  
+
+    public function useradmin() // вывод пользователей
+    {
+        $this->load->view('temp/head.php');
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navadmin.php', $data);
+        $this->load->model('user_model'); 
+        $data['users'] = $this->user_model->selectusers();
+        $data['contragent'] = $this->user_model->selectcontr();
+        $this->load->view('useradmin.php', $data);
+        $this->load->view('temp/footer.php');
+
+    }
+
+    public function upduser(){ // вывод конкретного пользователя в изменении
+        $UserID = $this->uri->segment(3,0);
+        $this->load->view('temp/head.php');
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navadmin.php', $data);
+        $this->load->model('user_model'); 
+        $data['users'] = $this->user_model->selectusers2($UserID);
+        $this->load->view('upduser.php', $data);
+        $this->load->view('temp/footer.php');
+    }
+
+    public function upduser2(){ // редактирование пользователя
+        $this->load->view('temp/head.php');
+        $this->load->view('temp/navadmin.php');
+        $this->load->model('user_model'); 
+        if(!empty($_POST))
+        {
+            $UserID=$_POST['UserID'];
+           $LastName = $_POST['LastName'];
+           $FirstName = $_POST['FirstName'];
+           $FatherName = $_POST['FatherName'];
+           $UserLogin = $_POST['UserLogin'];
+           $UserPassword = $_POST['UserPassword'];
+           $this->user_model->updpuser($UserPassword, $LastName, $FirstName, $FatherName, $UserLogin, $UserID); 
+           redirect('admin/useradmin');
+        }
+        $this->load->view('temp/footer.php');
+    }
+
+    public function inssuser() // добавить пользователя
+    {
+        if(!empty($_POST))
+        {
+            $this->load->model('user_model'); 
+            $LastName = $_POST['LastName']; 
+            $FirstName = $_POST['FirstName']; 
+            $FatherName = $_POST['FatherName']; 
+            $UserLogin = $_POST['UserLogin']; 
+            $UserPassword = $_POST['UserPassword'];
+            $ContragentID = $_POST['ContragentName'];
+            $this->user_model->insuser($LastName, $FirstName, $FatherName, $UserLogin, $UserPassword, $ContragentID);
+            redirect('admin/useradmin');
+        } 
+    }
+
+    public function inssprice() // добавить прайс лист
+    {
+        if(!empty($_POST))
+        {
+            $this->load->model('zakaz_model'); 
+            $TypeName = $_POST['TypeName']; 
+            $ProductName = $_POST['ProductName']; 
+            $this->zakaz_model->insprice($TypeName, $ProductName);
+            redirect('admin/pricelistadmin');
+        } 
+    }
+    
+    
+    public function deleteuser() // удалить пользователя
+    {
+        $UserID = $this->uri->segment(3,0);
+        $this->load->model('user_model'); 
+        $this->user_model->deluser($UserID);
+        redirect('admin/useradmin');
+    }
+
+    public function pricelistadmin() // вывод прайслиста
+    {
+        $this->load->view('temp/head.php');
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navadmin.php', $data);
+        $this->load->model('user_model'); 
+        $data['pricelist'] = $this->user_model->selectprice();
+        $data['product'] = $this->user_model->selectproduct();
+        $data['typeprice'] = $this->user_model->selecttype();
+        $this->load->view('pricelistadmin.php', $data);
+        $this->load->view('temp/footer.php');
+
+    }
+    public function upddprice(){ // вывод конкретного прайслист в изменении
+        $PriceID = $this->uri->segment(3,0);
+        $this->load->view('temp/head.php');
+        $user = $this->session->userdata();
+        $data['UserLogin'] = $user['UserLogin'];
+        $this->load->view('temp/navadmin.php', $data);
+        $this->load->model('user_model');
+        $data['product'] = $this->user_model->selectproduct();
+        $data['typeprice'] = $this->user_model->selecttype(); 
+        $data['pricelist'] = $this->user_model->selectprice2();
+        $data['priceID'] = $this->user_model->selectprice5($PriceID);
+        $this->load->view('upddprice.php', $data);
+        $this->load->view('temp/footer.php');
+    }
+
+    public function upddprice2(){ // редактирование прайслист
+        if(!empty($_POST))
+        {
+            $this->load->model('user_model');
+            $PriceID = $_POST['PriceID'];
+            $TypeID = $_POST['TypeName'];
+            $ProductID = $_POST['ProductName'];
+            $this->user_model->updprice($TypeID, $ProductID, $PriceID); 
+            redirect('admin/pricelistadmin');
+        }
+    }
+
+    public function deletprice() // удалить пользователя
+    {
+        $PriceID = $this->uri->segment(3,0);
+        $this->load->model('zakaz_model'); 
+        $this->zakaz_model->delprice($PriceID);
+        redirect('admin/pricelistadmin');
+    }
 }
 ?>

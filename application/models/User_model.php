@@ -47,7 +47,7 @@ class User_model extends CI_Model
     {
         $sql = "SELECT Orders.OrderID, Users.UserID, CONCAT(Users.LastName, ' ', Users.FirstName, ' ', Users.FatherName) AS FIO, Contragent.ContragentName, 
         Orders.OrderDate, Orders.OrderDatePlanPostav,Orders.OrderDateFactPostav, Orders.OrderCount, Orders.OrderStatus, 
-        Product.ProductPrice*Orders.OrderCount AS price FROM Users, Orders, Product, Contragent, PriceList 
+        Product.ProductPrice*Orders.OrderCount AS price FROM Users, Orders, Product, Contragent 
         WHERE Users.UserID=Orders.UserID AND Users.ContragentID=Contragent.ContragentID AND Orders.ProductID=Product.ProductID
          AND Orders.OrderDateFactPostav>Orders.OrderDatePlanPostav AND OrderDate>=? AND OrderDateFactPostav<=?";
         $result = $this->db->query($sql, array($d1, $d2));
@@ -81,6 +81,89 @@ class User_model extends CI_Model
     {
         $sql = "INSERT INTO contragent(ContragentBankRecvezit, ContragentAdress, ContragentPhone, ContragentName) VALUES (?,?,?,?)";
         $this->db->query($sql,array($ContragentBankRecvezit, $ContragentAdress, $ContragentPhone, $ContragentName));
+    }
+
+    public function selectusers(){ // выбрать всех пользователей
+        $sql = "SELECT UserID, CONCAT(Users.LastName, ' ', Users.FirstName, ' ', Users.FatherName) AS Fio,
+         ContragentName, ContragentPhone, ContragentAdress FROM users, contragent where RoleId=3 AND Users.ContragentID=Contragent.ContragentID";
+        $result = $this->db->query($sql, array());
+        return $result->result_array();
+    }
+
+    public function selectusers2($UserID){ // выбрать конкретного пользователя
+        $sql = "SELECT * FROM users WHERE UserID=?";
+        $result = $this->db->query($sql, array($UserID));
+        return $result->result_array();
+    }
+
+    public function insuser($LastName, $FirstName, $FatherName, $UserLogin, $UserPassword, $ContragentID) // добавить контрагента
+    {
+        $sql = "INSERT INTO users(LastName, FirstName, FatherName, UserLogin, UserPassword, RoleID, ContragentID) VALUES (?,?,?,?,?,3,?)";
+        $this->db->query($sql, array($LastName, $FirstName, $FatherName, $UserLogin, $UserPassword, $ContragentID));
+    }
+
+    public function deluser($UserID) // удалить пользователя
+    {
+        $sql = "DELETE FROM users Where UserID=?";
+        $this->db->query($sql, array($UserID));
+    }
+
+    public function updpuser($UserPassword, $LastName, $FirstName, $FatherName, $UserLogin, $UserID) // Обновить информацию о пользователе
+    {
+        $sql = "UPDATE users SET UserPassword=?, LastName=?, FirstName=?, FatherName=?, UserLogin=?  WHERE UserID=?";
+        $this->db->query($sql, array($UserPassword, $LastName, $FirstName, $FatherName, $UserLogin, $UserID));
+    }
+
+    public function selectprice(){ // выбрать все прайслисты
+        $sql = "SELECT PriceID, ProductName, TypeName FROM pricelist, product, typeprice 
+        where pricelist.ProductID = product.ProductID AND typeprice.TypeID = pricelist.TypeID";
+        $result = $this->db->query($sql, array());
+        return $result->result_array();
+    }
+
+    public function selecttype(){ // выбрать тип прайса
+        $sql = "SELECT * FROM typeprice";
+        $result = $this->db->query($sql, array());
+        return $result->result_array();
+    }
+
+    public function selectproduct(){ // выбрать рыбу
+        $sql = "SELECT ProductID, ProductName FROM product";
+        $result = $this->db->query($sql, array());
+        return $result->result_array();
+    }
+    
+
+    public function selectprice2(){ // выбрать конкретный прайс для редактирования
+        $sql = "SELECT * FROM pricelist, typeprice, product WHERE  typeprice.TypeID=pricelist.TypeID 
+        AND Product.ProductID = pricelist.ProductID";
+        $result = $this->db->query($sql, array());
+        return $result->result_array();
+    }
+
+    public function selectprice5($PriceID){ // выбрать конкретный прайс для редактирования
+        $sql = "SELECT * FROM pricelist, typeprice, product WHERE  typeprice.TypeID=pricelist.TypeID 
+        AND Product.ProductID = pricelist.ProductID AND PriceID=?";
+        $result = $this->db->query($sql, array($PriceID));
+        return $result->result_array();
+    }
+
+    public function insprice($TypeID, $ProductID, $PriceID) // добавить прайслист
+    {
+        $sql = "INSERT INTO pricelist(TypeID, ProductID, PriceID) VALUES (?,?,?)";
+        $this->db->query($sql, array($TypeID, $ProductID, $PriceID));
+    }
+
+    public function delprice($PriceID) // удалить прайслист
+    {
+        $sql = "DELETE FROM pricelist Where PriceID=?";
+        $this->db->query($sql, array($PriceID));
+    }
+
+    public function updprice($TypeID, $ProductID, $PriceID) // Обновить информацию о прайсе
+    {
+        $sql = "UPDATE pricelist SET TypeID=?, ProductID=?  WHERE PriceID=?";
+        $this->db->query($sql, array($TypeID, $ProductID, $PriceID));
     }
 }
 ?>

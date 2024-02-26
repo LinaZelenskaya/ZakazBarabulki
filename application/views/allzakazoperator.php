@@ -18,6 +18,7 @@
                                 <th>Цена заказа</th>
                                 <th>Статус</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <?php

@@ -39,12 +39,12 @@ class Main extends CI_Controller
                 $searchproductpriceC = $_POST['searchproductpriceC'];
                 $searchproductpricePo = $_POST['searchproductpricePo'];
                 $data['fish'] = $this->product_model->productfilter($fishname, $searchproductpriceC, $searchproductpricePo);
-                $this->load->view('main_view.php', $data);
+                $this->load->view('main_viewgost.php', $data);
             }
             else
             {
                 $data['fish'] = $this->product_model->productselect();
-                $this->load->view('main_view.php', $data);
+                $this->load->view('main_viewgost.php', $data);
             }
         }
         else if($user['RoleID'] == 3)

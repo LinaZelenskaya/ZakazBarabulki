@@ -14,6 +14,12 @@
                         <a class="nav-link active" aria-current="page" href="admin/contr1"><u>Контрагенты</u></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="admin/useradmin"><u>Пользователи</u></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="admin/pricelistadmin"><u>Прайслисты</u></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="admin/allcontragent"><u>Отчет контрагенты</u></a>
                     </li>
                     <li class="nav-item">
@@ -22,13 +28,13 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="admin/allcontragentzakaz"><u>Отчет заказы</u></a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <?php
                             echo "<a class='nav-link'>На сайте: $UserLogin</a>";
                         ?>
                     </li>
                 </ul>
-                <ul class="navbar-nav w-100 justify-content-end">
+                <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="main/logout">Выход</a>
                     </li>

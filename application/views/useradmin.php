@@ -1,23 +1,37 @@
 <main style="background-color: #ebe7e3;">
     <div class="container mb-2"><br>
-    <form method="POST" action="admin/inssagent">
+    <form method="POST" action="admin/inssuser">
                 <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class ="col-lg-2">
-                            <input type="text" class="form-control"  id="ContragentName" name="ContragentName" placeholder="Название">
+                            <input type="text" class="form-control"  id="LastName" name="LastName" placeholder="Фамилия">
                         </div>
                         <div class ="col-lg-2">
-                            <input type="text" class="form-control"  id="ContragentAdress" name="ContragentAdress" placeholder="Адрес">
+                            <input type="text" class="form-control"  id="FirstName" name="FirstName" placeholder="Имя">
                         </div>
                         <div class ="col-lg-2">
-                            <input type="text" class="form-control"  id="ContragentPhone" name="ContragentPhone" placeholder="Телефон">
+                            <input type="text" class="form-control"  id="FatherName" name="FatherName" placeholder="Отчество">
                         </div>
                         <div class ="col-lg-2">
-                            <input type="text" class="form-control"  id="ContragentBankRecvezit" name="ContragentBankRecvezit" placeholder="Банковские реквезиты">
+                        <select class="form-select" aria-label="Default select example" name="ContragentName" id="ContragentName">
+                                    <option value=""></option>
+                                <?php
+                                    foreach($contragent as $row)
+                                    {
+                                       echo '<option value="'.$row['ContragentID'].'">'.$row['ContragentName'].'</option>';
+                                    }
+                                ?>
+                                </select>
+                        </div>
+                        <div class ="col-lg-2">
+                        <input type="text" class="form-control"  id="UserLogin" name="UserLogin" placeholder="Логин">
+                        </div>
+                        <div class ="col-lg-2">
+                        <input type="text" class="form-control"  id="UserPassword" name="UserPassword" placeholder="Пароль">
                         </div>
                         <div class ="col-lg-4">
-                            <button type="submit" class="btn btn-danger">Новый контрагент</button>
+                            <br><button type="submit" class="btn btn-danger">Новый пользователь</button>
                         </div>
                     </div>
                 </div></div></form>
@@ -29,36 +43,32 @@
                         <thead>
                             <tr>
                                 <th>ID пользователя</th>
-                                <th>Фамилия</th>
-                                <th>Имя</th>
-                                <th>Отчество</th>
-                                <th>Роль</th>
-                                <th>Логин</th>
-                                <th>Пароль</th>
-                                <th>Пароль</th>
-                                <th>Id контрагенства</th>
+                                <th>Фио</th>
+                                <th>Контрагентство</th>
+                                <th>Телефон</th>
+                                <th>Адрес</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <?php
-                            foreach($contragent as $row)
+                            foreach($users as $row)
                             {
                                 echo '<tr>
                                 <td>'.$row['UserID'].'</td>
-                                <td>'.$row['LastName'].'</td>
-                                <td>'.$row['FirstName'].'</td>
-                                <td>'.$row['FatherName'].'</td>
-                                <td>'.$row['RoleID '].'</td>
-                                <td>'.$row['UserLogin '].'</td>
-                                <td>'.$row['UserPassword '].'</td>';
-                                if(!empty($row['contragent']))
+                                <td>'.$row['Fio'].'</td>
+                                <td>'.$row['ContragentName'].'</td>
+                                <td>'.$row['ContragentPhone'].'</td>
+                                <td>'.$row['ContragentAdress'].'</td>';
+
+                                if(!empty($row['users']))
                                 {
-                                   echo'<th>'.$row['contragent'].'</th>';
+                                   echo'<th>'.$row['users'].'</th>';
                                 }
                                 else
                                 {
-                                    echo '<th><a href="admin/deletecontr/'.$row['ContragentID'].'"><button type="button" class="btn btn-danger">Удалить</button></a></th>';
-                                    echo '<th><a href="admin/updpdcontr/'.$row['ContragentID'].'"><button type="button" class="btn btn-danger">Редактировать</button></a></th>';
+                                    echo '<th><a href="admin/deleteuser/'.$row['UserID'].'"><button type="button" class="btn btn-danger">Удалить</button></a></th>';
+                                    echo '<th><a href="admin/upduser/'.$row['UserID'].'"><button type="button" class="btn btn-danger">Редактировать</button></a></th>';
                                 }
                                 echo '</tr>';
                             }
